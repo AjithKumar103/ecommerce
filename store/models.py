@@ -17,9 +17,18 @@ class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=False)
+    image = models.ImageField(upload_to="product_pics", null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
+
+    @property
+    def imageUrl(self):
+        try:
+            url = self.image.url
+        except:
+            url = ""
+        return url
 
 
 class Order(models.Model):
@@ -33,6 +42,16 @@ class Order(models.Model):
     def __str__(self) -> str:
         return str(self.id)
 
+    @property
+    def get_order_total(self):
+        items = self.orderitem_set.all()
+        return sum([item.get_total for item in items])
+
+    @property
+    def get_order_item(self):
+        items = self.orderitem_set.all()
+        return sum([item.quantity for item in items])
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey(
@@ -41,6 +60,10 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(default=0, null=True, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def get_total(self):
+        return self.product.price * self.quantity
 
 
 class ShippingAddress(models.Model):
