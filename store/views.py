@@ -55,7 +55,7 @@ def updateItem(request):
 
     product = Product.objects.get(id=productid)
     customer = request.user.customer
-    order, created = Order.objects.get_or_create(customer=customer)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
     order_item, created = OrderItem.objects.get_or_create(order=order, product=product)
 
     if action == "add":
