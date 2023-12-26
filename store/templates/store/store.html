@@ -1,7 +1,7 @@
 {% extends "store/main.html" %}
 {% load static %}
 {% block content %}
-<div class="row">
+<div class="row" id="token">
   {% for product in products %}
   <div class="col-lg-4">
     <img class="thumbnail" src="{{product.imageUrl}}" alt="Product">
@@ -15,5 +15,6 @@
     </div>
   </div>
   {% endfor %}
+  {% comment %} {% csrf_token %} {% endcomment %}
 </div>
 {% endblock content %}
