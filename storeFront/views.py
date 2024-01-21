@@ -1,37 +1,16 @@
-# from django.shortcuts import render
-# from django.http import JsonResponse
-
-# import json
-# import datetime
-# from .models import *
-# from .utils import *
+from django.shortcuts import render
 
 
-# def store(request):
-#     data = cartData(request)
-#     cart_items = data["cart_items"]
-#     products = Product.objects.all()
-#     context = {"products": products, "cart_items": cart_items}
-#     return render(request, "store/store.html", context)
+def store(request):
+    return render(request, "storeFront/store.html")
 
 
-# def cart(request):
-#     data = cartData(request)
-#     items = data["items"]
-#     order = data["order"]
-#     cart_items = data["cart_items"]
-
-#     context = {"items": items, "order": order, "cart_items": cart_items}
-#     return render(request, "store/cart.html", context)
+def cart(request):
+    return render(request, "storeFront/cart.html")
 
 
-# def checkout(request):
-#     data = cartData(request)
-#     items = data["items"]
-#     order = data["order"]
-#     cart_items = data["cart_items"]
-#     context = {"items": items, "order": order, "cart_items": cart_items}
-#     return render(request, "store/checkout.html", context)
+def checkout(request):
+    return render(request, "storeFront/checkout.html")
 
 
 # def updateItem(request):

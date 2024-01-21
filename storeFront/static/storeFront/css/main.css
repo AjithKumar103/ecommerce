@@ -1,13 +1,21 @@
-/* html{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+html{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body{
-  background-color: #fff;
-  font-family: sans-serif;
+  background-color: #f7f7f7;
+  font-family: 'Poppins',Arial;
 }
+
+h1,h2,h3,h4,h5,h6{
+	color:#454105;
+  font-family: 'Poppins';
+  margin: 0;
+}	
 
 nav{
   background-color: #5690ce;
@@ -100,7 +108,7 @@ nav a:hover{
 }
 
 .container{
-  margin-top: 60px;
+  padding-top: 60px;
 }
 
 .flex-container{
@@ -109,6 +117,27 @@ nav a:hover{
   width: 100%;
 }
 
+.row-cord{
+  background-color: #fff;
+  width: 100%;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.row-cord h5{
+  margin-left: 20px;
+  font-weight: 600;
+}
+
+.cord-shadow{
+  box-shadow: 1px 1px 5px rgba(0, 0, 0,0.5);
+}
+
 .hidden{
   display: none;
-} */
+}

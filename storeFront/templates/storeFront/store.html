@@ -1,0 +1,23 @@
+{% extends "storeFront/main.html" %}
+{% load static %}
+{% block content %}
+<div class="row-cord cord-shadow">
+  <h5>Rice & Cereal</h5>
+</div>
+<div class="row" id="row-one">
+</div>
+<div class="row-cord cord-shadow">
+  <h5>Spices</h5>
+</div>
+<div class="row" id="row-two">
+</div>
+<div class="row-cord cord-shadow">
+  <h5>Snacks & Biscuits</h5>
+</div>
+<div class="row" id="row-three">
+</div>
+{% endblock content %}
+
+{% block script_tag %}
+<script src="{% static 'storeFront/js/store.js' %}"></script>
+{% endblock script_tag %}
