@@ -1,25 +1,51 @@
 
 let rowOne = document.querySelector('#row-one')
-p_name = 'rice'
-p_price = 48.76
-id = 1
-for (let i = 0; i < 8; i++){
+let rowTwo = document.querySelector('#row-two')
+let rowThree = document.querySelector('#row-three')
 
-  rowOne.innerHTML += `<div class="col-lg-3">
-  <img class="thumbnail" src="" alt="Product">
-  <div class="box-element product">
-    <h6><strong>${p_name}</strong></h6>
-    <hr>
-    <div class="flex-container">
-      <h6>Price:</h6>
-      <h6>Rs.${p_price}</h6>
+function listProducts(){
+  url = 'http://127.0.0.1:8000/api/productlist/'
+  fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    for (let i = 0; i < data.length; i++){
+    let snippet = `<div class="col-lg-3">
+    <img class="thumbnail" src="${data[i].imageUrl}" alt="Product">
+    <div class="box-element product">
+      <h6><strong>${data[i].name}</strong></h6>
+      <hr>
+      <div class="flex-container">
+        <h6>Price:</h6>
+        <h6>Rs.${data[i].price}</h6>
+      </div>
+      <hr>
+      <div class="flex-container">
+        <button data-pId=${data[i].id} data-action="add" class="btn btn-outline-warning add-btn update-cart">Add To
+          Cart</button>
+        <a href="#" class="btn btn-outline-primary">View</a>
+      </div>
     </div>
-    <hr>
-    <div class="flex-container">
-      <button data-product=${id} data-action="add" class="btn btn-outline-warning add-btn update-cart">Add To
-        Cart</button>
-      <a href="#" class="btn btn-outline-primary">View</a>
-    </div>
-  </div>
-</div>`;
+  </div>`;
+  if (data[i].type == 'rc'){
+    rowOne.innerHTML += snippet;
+  }else if (data[i].type == 'cs'){
+    rowTwo.innerHTML += snippet;
+  }else if (data[i].type == 'sb'){
+    rowThree.innerHTML += snippet;
+  }
+    }
+  })
 }
+
+listProducts()
+
+let addBtns = document.querySelectorAll('.add-btn')
+
+addBtns.forEach(function(addBtn){
+  addBtn.addEventListener('click',function(e){
+    // console.log(this)
+    // console.log(this.dataset.pId)
+    // url = 'http://127.0.0.1:8000/api/product/'
+    // fetch(url)
+  })
+})
