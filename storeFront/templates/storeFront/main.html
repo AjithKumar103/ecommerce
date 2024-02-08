@@ -9,8 +9,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'storeFront/css/main.css' %}">
-  <!-- <script>
+  <script>
     var user = '{{request.user}}'
+  </script>
+  <!-- <script>
     function getToken(name) {
       let cookieValue = null;
       if (document.cookie && document.cookie !== '') {
@@ -90,8 +92,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-  {% block script_tag %}
-  {% endblock script_tag %}
+  <script src="{% static 'storeFront/js/store.js' %}"></script>
+
   <script src="{% static 'storeFront/js/cart.js' %}"></script>
 </body>
 
