@@ -145,5 +145,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Authentication fields
 
-LOGIN_REDIRECT_URL = "store"
+LOGIN_REDIRECT_URL = "cart"
 LOGIN_URL = "login"

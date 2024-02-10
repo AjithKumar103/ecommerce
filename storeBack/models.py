@@ -15,7 +15,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.IntegerField()
     type = models.CharField(
         max_length=3,
         choices=[
@@ -49,6 +49,16 @@ class Order(models.Model):
     def __str__(self) -> str:
         return str(self.id)
 
+    @property
+    def get_total_order_cost(self):
+        items = self.order_items.all()
+        return sum([item.get_total for item in items])
+
+    @property
+    def get_total_order_items(self):
+        items = self.order_items.all()
+        return sum([item.quantity for item in items])
+
     # @property
     # def shipping(self):
     #     shipping = False
@@ -58,22 +68,18 @@ class Order(models.Model):
     #             shipping = True
     #     return shipping
 
-    @property
-    def get_order_total_cost(self):
-        items = self.orderitem_set.all()
-        return sum([item.get_total for item in items])
-
-    @property
-    def get_order_total_item(self):
-        items = self.orderitem_set.all()
-        return sum([item.quantity for item in items])
-
 
 class OrderItem(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.SET_NULL, null=True, blank=True
     )
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
+    order = models.ForeignKey(
+        Order,
+        related_name="order_items",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
     quantity = models.IntegerField(default=0, null=True, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
 

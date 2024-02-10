@@ -46,7 +46,7 @@ function listProducts(){
           headers:{
             'Content-Type':"application/json"
           },
-          body:JSON.stringify({pid:this.dataset.pid}),
+          body:JSON.stringify({pid:this.dataset.pid,action:'add'}),
         })
         .then(response => {
           if (response.status == 200){
