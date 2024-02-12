@@ -1,52 +1,37 @@
-// let updateBtns = document.querySelectorAll(".update-cart");
-// console.log(updateBtns)
+const cartBox = document.getElementById('cart-box')
 
+function showCartItems(){
+  const url = 'http://127.0.0.1:8000/api/cart-list/'
+  fetch(url)
+  .then( response => response.json())
+  .then( data => {
+    cartItems = data.order_items
+    for (let i = 0; i < data.order_items.length; i++){
+      cartBox.innerHTML += `
+      <div class="cart-row">
+        <div style="flex:2"><img class="row-image" src="${cartItems[i].product_item.imageUrl}"></div>
+        <div style="flex:2">
+          <p>${cartItems[i].product_item.name}</p>
+        </div>
+        <div style="flex:1">
+          <p>Rs.${cartItems[i].product_item.price}</p>
+        </div>
+        <div style="flex:1">
+          <p class="quantity">${cartItems[i].quantity}</p>
+          <div class="quantity">
+            <img data-product=${cartItems[i].id} data-action="add" class="chg-quantity update-cart"
+              src="/media/images/arrow-up.png">
+      
+            <img data-product=${cartItems[i].id} data-action="remove" class="chg-quantity update-cart"
+              src="/media/images/arrow-down.png">
+          </div>
+        </div>
+        <div style="flex:1">
+          <p>Rs.${cartItems[i].get_total}</p>
+        </div>
+      </div>`
+    }
+  })
+}
 
-// for (let i=0; i < updateBtns.length; i++){
-//   updateBtns[i].addEventListener('click',function(){
-//     let productId = this.dataset.product;
-//     let action = this.dataset.action;
-//     if(user == 'AnonymousUser'){
-//       addCookieItem(productId,action);
-//     }else{
-//       updateUserOrder(productId,action);
-//     }
-//   })
-// }
-
-// function addCookieItem(productId,action){
-//   if (action == 'add'){
-//     if (cart[productId] == undefined){
-//       cart[productId] = {'quantity':1}
-//     }else{
-//       cart[productId]['quantity'] += 1
-//     }
-//   }
-//   if (action == 'remove'){
-//     cart[productId]['quantity'] -= 1
-//     if (cart[productId]['quantity'] <= 0){
-//       delete cart[productId]
-//     }
-//   }
-//   console.log(cart)
-//   document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
-//   location.reload()
-// }
-
-// function updateUserOrder(productId,action){
-//   console.log("user is logged sending data")
-//   let url = '/update_item/'
-//   fetch(url,{
-//     method:"POST",
-//     headers:{
-//       "Content-Type":"application/json",
-//       "X-CSRFToken":csrftoken},
-//     body:JSON.stringify({'productId':productId,'action':action})
-//   })
-//   .then(response => response.json())
-//   .then(data => {
-//     console.log('data',data['response']);
-//     window.location.reload()
-//   })
-// }
-
+showCartItems()

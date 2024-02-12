@@ -16,7 +16,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    cart_item = ProductSerializer(source="product", read_only=True)
+    product_item = ProductSerializer(source="product", read_only=True)
 
     class Meta:
         model = OrderItem
@@ -24,7 +24,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
             "id",
             "quantity",
             "get_total",
-            "cart_item",
+            "product_item",
         )
 
 
