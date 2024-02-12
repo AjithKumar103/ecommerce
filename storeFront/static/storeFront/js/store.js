@@ -37,6 +37,7 @@ function listProducts(){
         rowThree.innerHTML += snippet;
       }
     }
+
     const addToCartBtns = document.querySelectorAll('.add-to-cart');
     addToCartBtns.forEach(
       addBtn => addBtn.addEventListener('click',function() {

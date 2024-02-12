@@ -49,6 +49,4 @@ def cartListApi(request, *args, **kwargs):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         serializer = OrderSerializer(instance=order)
-        # orderItem = OrderItem.objects.filter(order=order).all()
-        # serializer = OrderItemSerializer(instance=orderItem, many=True)
         return Response(serializer.data)

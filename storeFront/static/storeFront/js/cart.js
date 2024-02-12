@@ -1,15 +1,19 @@
-const cartBox = document.getElementById('cart-box')
+const cartBox = document.getElementById('cart-box');
+const totalItems = document.getElementById('total-items');
+const totalCost = document.getElementById('total-cost');
 
 function showCartItems(){
   const url = 'http://127.0.0.1:8000/api/cart-list/'
   fetch(url)
   .then( response => response.json())
   .then( data => {
+    totalItems.innerText = data.get_total_order_items
+    totalCost.innerText = data.get_total_order_cost
     cartItems = data.order_items
     for (let i = 0; i < data.order_items.length; i++){
       cartBox.innerHTML += `
       <div class="cart-row">
-        <div style="flex:2"><img class="row-image" src="${cartItems[i].product_item.imageUrl}"></div>
+        <div style="flex:2"><img class="row-image" src="${cartItems[i].product_item.imageUrl}" alt="product-image"></div>
         <div style="flex:2">
           <p>${cartItems[i].product_item.name}</p>
         </div>
