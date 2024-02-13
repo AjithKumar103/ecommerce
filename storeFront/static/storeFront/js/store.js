@@ -1,17 +1,16 @@
+let rowOne = document.querySelector("#row-one");
+let rowTwo = document.querySelector("#row-two");
+let rowThree = document.querySelector("#row-three");
 
-let rowOne = document.querySelector('#row-one')
-let rowTwo = document.querySelector('#row-two')
-let rowThree = document.querySelector('#row-three')
+listProducts();
 
-listProducts()
-
-function listProducts(){
-  url = 'http://127.0.0.1:8000/api/product-list/'
+function listProducts() {
+  url = "http://127.0.0.1:8000/api/product-list/";
   fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    for (let i = 0; i < data.length; i++){
-      let snippet = `
+    .then((response) => response.json())
+    .then((data) => {
+      for (let i = 0; i < data.length; i++) {
+        let snippet = `
       <div class="col-lg-3">
         <img class="thumbnail" src="${data[i].imageUrl}" alt="Product">
         <div id="sample" class="box-element product">
@@ -29,35 +28,33 @@ function listProducts(){
           </div>
         </div>
       </div>`;
-      if (data[i].type == 'rc'){
-        rowOne.innerHTML += snippet;
-      }else if (data[i].type == 'cs'){
-        rowTwo.innerHTML += snippet;
-      }else if (data[i].type == 'sb'){
-        rowThree.innerHTML += snippet;
+        if (data[i].type == "rc") {
+          rowOne.innerHTML += snippet;
+        } else if (data[i].type == "cs") {
+          rowTwo.innerHTML += snippet;
+        } else if (data[i].type == "sb") {
+          rowThree.innerHTML += snippet;
+        }
       }
-    }
 
-    const addToCartBtns = document.querySelectorAll('.add-to-cart');
-    addToCartBtns.forEach(
-      addBtn => addBtn.addEventListener('click',function() {
-        url = 'http://127.0.0.1:8000/api/add-to-cart/'
-        fetch(url,{
-          method:'POST',
-          headers:{
-            'Content-Type':"application/json"
-          },
-          body:JSON.stringify({pid:this.dataset.pid,action:'add'}),
+      const addToCartBtns = document.querySelectorAll(".add-to-cart");
+      addToCartBtns.forEach((addBtn) =>
+        addBtn.addEventListener("click", function () {
+          url = "http://127.0.0.1:8000/api/add-to-cart/";
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ pid: this.dataset.pid, action: "add" }),
+          }).then((response) => {
+            if (response.status == 200) {
+              console.log("OK");
+            } else {
+              console.log("NO");
+            }
+          });
         })
-        .then(response => {
-          if (response.status == 200){
-            console.log("OK")
-          }else{
-            console.log("NO")
-          }
-        })
-      }
-      )
-    )
-  })
+      );
+    });
 }

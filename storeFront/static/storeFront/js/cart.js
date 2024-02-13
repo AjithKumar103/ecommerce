@@ -1,17 +1,17 @@
-const cartBox = document.getElementById('cart-box');
-const totalItems = document.getElementById('total-items');
-const totalCost = document.getElementById('total-cost');
+const cartBox = document.getElementById("cart-box");
+const totalItems = document.getElementById("total-items");
+const totalCost = document.getElementById("total-cost");
 
-function showCartItems(){
-  const url = 'http://127.0.0.1:8000/api/cart-list/'
+function showCartItems() {
+  const url = "http://127.0.0.1:8000/api/cart-list/";
   fetch(url)
-  .then( response => response.json())
-  .then( data => {
-    totalItems.innerText = data.get_total_order_items
-    totalCost.innerText = data.get_total_order_cost
-    cartItems = data.order_items
-    for (let i = 0; i < data.order_items.length; i++){
-      cartBox.innerHTML += `
+    .then((response) => response.json())
+    .then((data) => {
+      totalItems.innerText = data.get_total_order_items;
+      totalCost.innerText = data.get_total_order_cost;
+      cartItems = data.order_items;
+      for (let i = 0; i < data.order_items.length; i++) {
+        cartBox.innerHTML += `
       <div class="cart-row">
         <div style="flex:2"><img class="row-image" src="${cartItems[i].product_item.imageUrl}" alt="product-image"></div>
         <div style="flex:2">
@@ -33,9 +33,9 @@ function showCartItems(){
         <div style="flex:1">
           <p>Rs.${cartItems[i].get_total}</p>
         </div>
-      </div>`
-    }
-  })
+      </div>`;
+      }
+    });
 }
 
-showCartItems()
+showCartItems();
